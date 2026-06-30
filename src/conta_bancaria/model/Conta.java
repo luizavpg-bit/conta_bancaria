@@ -1,13 +1,15 @@
 package conta_bancaria.model;
 
 public abstract class Conta {
-    
-    private int numero;
+
+	/* Atributos da Classe*/
+	private int numero;
 	private int agencia;
 	private int tipo;
 	private String titular;
 	private float saldo;
-
+	
+	/* Método Construtor - Gerar as instâncias (Objetos) da Classe*/
 	public Conta(int numero, int agencia, int tipo, String titular, float saldo) {
 		this.numero = numero;
 		this.agencia = agencia;
@@ -20,6 +22,7 @@ public abstract class Conta {
 		return numero;
 	}
 
+	/* Métodos Get (visualizar os dados) e Set (Modificar os dados)*/
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
@@ -55,44 +58,43 @@ public abstract class Conta {
 	public void setSaldo(float saldo) {
 		this.saldo = saldo;
 	}
-
+	
+	// Métodos Auxiliares
+	
 	public boolean sacar(float valor) {
 		
-		if(this.getSaldo() < valor) {
-			System.out.println("Saldo Insuficiente!");
+		if (this.saldo < valor)
 			return false;
-		}
 		
-		this.setSaldo(this.getSaldo() - valor);
+		this.saldo -= valor;
 		return true;
-		
 	}
 	
 	public void depositar(float valor) {
-		this.setSaldo(this.getSaldo() + valor);
+		this.saldo += valor;
 	}
 	
 	public void visualizar() {
-
+		
 		String tipo = "";
 		
 		switch(this.tipo) {
-		case 1:
-			tipo = "Conta Corrente";
-		break;
-		case 2:
-			tipo = "Conta Poupança";
-		break;
+			case 1:
+				tipo = "Conta Corrente";
+			break;
+			case 2: 
+				tipo = "Conta Poupança";
+			break;
 		}
 		
-		System.out.println("\n\n***********************************************************");
-		System.out.println("Dados da Conta:");
-		System.out.println("***********************************************************");
-		System.out.println("Numero da Conta: " + this.numero);
-		System.out.println("Agência: " + this.agencia);
-		System.out.println("Tipo da Conta: " + tipo);
-		System.out.println("Titular: " + this.titular);
-		System.out.printf("Saldo: R$ %.2f%n", this.saldo);
+		System.out.println("*******************************************************");
+		System.out.println("                    DADOS DA CONTA                     ");
+		System.out.println("*******************************************************");
+		System.out.printf("Número da conta: %d%n", this.numero);
+		System.out.printf("Número da agência: %d%n", this.agencia);
+		System.out.printf("Tipo da conta: %s%n", tipo);
+		System.out.printf("Nome do titular: %s%n", this.titular);
+		System.out.printf("Saldo da conta: %.2f%n", this.saldo);
 	}
-    
+	
 }
